@@ -1,0 +1,15 @@
+import math
+
+# Pedir valores al usuario
+x1 = float(input("Ingresa x1: "))
+y1 = float(input("Ingresa y1: "))
+x2 = float(input("Ingresa x2: "))
+y2 = float(input("Ingresa y2: "))
+
+# Calcular distancias
+dm = abs(x1 - x2) + abs(y1 - y2)
+de = math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+
+# Imprimir resultados
+print("Distancia Manhattan:", dm)
+print("Distancia Euclidiana:", de)
