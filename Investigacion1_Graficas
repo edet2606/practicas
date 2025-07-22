@@ -1,0 +1,19 @@
+#es el codigo de la letra E
+import matplotlib.pyplot as plt
+
+puntos = [(0, 0),(0, 10),(6, 10),(6, 9),(2, 9),(2, 6.5),(6, 6.5),(6, 5.5),(2, 5.5),(2, 2),(6, 2),(6, 0),(0, 0)]
+
+
+x, y = zip(*puntos)
+plt.figure(figsize=(4, 6))
+plt.plot(x, y, color='black', linewidth=3)        
+plt.scatter(x, y, color='red', s=50)
+
+
+plt.title("Letra E mayúscula")
+plt.axis('equal')
+plt.axis('off')
+plt.show()
+
+
+#el siguiente es para el corazon
