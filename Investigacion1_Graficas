@@ -17,3 +17,18 @@ plt.show()
 
 
 #el siguiente es para el corazon
+# Coordenadas que forman un corazón simétrico y cerrado
+puntos_corazon = [(1, 2),(0, 4),(1, 5),(2.5, 4),(4, 5),(5, 4),(4, 2),(2.5, 0)]
+
+# Separar en listas de x e y
+x, y = zip(*puntos_corazon)
+
+plt.figure(figsize=(6,6))
+# Dibujar líneas conectando los puntos y cerrar el contorno volviendo al inicio
+plt.plot(x + (x[0],), y + (y[0],), color='red', linewidth=3)
+plt.scatter(x, y, color='red', s=50)
+
+plt.title("Contorno de corazón con puntos")
+plt.axis('equal')
+plt.axis('off')
+plt.show()
