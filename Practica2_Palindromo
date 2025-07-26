@@ -1,0 +1,11 @@
+# Solicita al usuario que ingrese una palabra
+palabra = input("Ingresa una palabra: ")
+
+# Convierte la palabra a minúsculas para que la comparación no distinga mayúsculas
+palabra_limpia = palabra.lower()
+
+# Verifica si la palabra es igual a su reverso
+if palabra_limpia == palabra_limpia[::-1]:
+    print("Es un palíndromo.")
+else:
+    print("No es un palíndromo.")
