@@ -1,0 +1,47 @@
+##numero 8
+a = int(input("Ingresa el primer número: "))
+b = int(input("Ingresa el segundo número: "))
+c = int(input("Ingresa el tercer número: "))
+
+mayor = max(a, b, c)
+print("El número mayor es:", mayor)
+
+##numero 9
+numero = input("Ingresa un número entero: ")
+suma = sum(int(digito) for digito in numero)
+print("La suma de los dígitos es:", suma)
+
+##numero 10
+frase = input("Ingresa una frase: ")
+palabras = frase.split()
+print("Número de palabras:", len(palabras))
+
+##numero 11
+lista = list(range(10, 0, -1))
+print("Lista inversa:", lista)
+
+##numero 12
+import random
+
+numeros = random.sample(range(1, 21), 5)
+print("Números aleatorios:", numeros)
+
+##numero 13
+##import random
+
+secreto = random.randint(1, 10)
+
+while True:
+    intento = int(input("Adivina el número entre 1 y 10: "))
+    
+    if intento == secreto:
+        print("¡Correcto! Adivinaste el número.")
+        break
+    elif intento < secreto:
+        print("Pista: el número es mayor.")
+    else:
+        print("Pista: el número es menor.")
+##numero 14
+lista = [i for i in range(1, 61) if i % 3 == 0]
+print("Múltiplos de 3 entre 1 y 60:", lista)
+
