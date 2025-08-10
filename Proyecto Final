@@ -1,0 +1,92 @@
+import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+
+# Crear ventana
+ventana = tk.Tk()
+ventana.title("Calculadora con Gráfica")
+ventana.geometry("600x500")
+
+# Entradas y etiquetas
+tk.Label(ventana, text="Valor X:").place(x=30, y=30)
+entrada_x = tk.Entry(ventana)
+entrada_x.place(x=100, y=30)
+
+tk.Label(ventana, text="Valor Y:").place(x=30, y=70)
+entrada_y = tk.Entry(ventana)
+entrada_y.place(x=100, y=70)
+
+# Resultado
+resultado_label = tk.Label(ventana, text="Resultado: ")
+resultado_label.place(x=400, y=60)
+
+# Frame para la gráfica
+ancho_px, alto_px = 400, 300
+frame_grafica = tk.Frame(ventana, width=ancho_px, height=alto_px, bg="white")
+frame_grafica.place(x=100, y=180)
+
+# Función para obtener números
+def obtener_valores():
+    try:
+        return float(entrada_x.get()), float(entrada_y.get())
+    except ValueError:
+        resultado_label.config(text="Ingresa solo números.")
+        return None, None
+
+# Función para graficar
+def graficar():
+    x, y = obtener_valores()
+    if x is None or y is None:
+        return
+
+    # Limpiar gráfica anterior
+    for widget in frame_grafica.winfo_children():
+        widget.destroy()
+
+    # Crear figura
+    dpi = 100
+    fig, ax = plt.subplots(figsize=(ancho_px/dpi, alto_px/dpi), dpi=dpi)
+
+    # Graficar línea y punto
+    ax.plot([0, x], [0, y], marker='o', label=f"Punto ({x}, {y})")
+    ax.axhline(0, color='black', linewidth=0.8)
+    ax.axvline(0, color='black', linewidth=0.8)
+    ax.set_title("Gráfico del punto ingresado")
+    ax.set_xlabel("Eje X")
+    ax.set_ylabel("Eje Y")
+    ax.legend()
+
+    # Mostrar figura en Frame
+    canvas = FigureCanvasTkAgg(fig, master=frame_grafica)
+    canvas.draw()
+    canvas.get_tk_widget().place(x=0, y=0, width=ancho_px, height=alto_px)
+
+# Función genérica para operaciones
+def operar(operacion):
+    x, y = obtener_valores()
+    if x is None or y is None:
+        return
+
+    if operacion == "sumar":
+        resultado = x + y
+    elif operacion == "restar":
+        resultado = x - y
+    elif operacion == "multiplicar":
+        resultado = x * y
+    elif operacion == "dividir":
+        if y != 0:
+            resultado = x / y
+        else:
+            resultado_label.config(text="Error: división por cero")
+            return
+
+    resultado_label.config(text=f"Resultado: {resultado}")
+
+# Botones
+tk.Button(ventana, text="Sumar", command=lambda: operar("sumar")).place(x=90, y=110)
+tk.Button(ventana, text="Restar", command=lambda: operar("restar")).place(x=160, y=110)
+tk.Button(ventana, text="Multiplicar", command=lambda: operar("multiplicar")).place(x=230, y=110)
+tk.Button(ventana, text="Dividir", command=lambda: operar("dividir")).place(x=330, y=110)
+tk.Button(ventana, text="Graficar", command=graficar).place(x=260, y=150)  # Bajado para no tapar resultado
+
+ventana.mainloop()
